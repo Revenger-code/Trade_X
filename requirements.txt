@@ -3,3 +3,4 @@ lxml
 numpy
 pandas
 joblib
+scikit-learn==1.2.2
