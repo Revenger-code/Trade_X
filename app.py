@@ -1,7 +1,6 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
-import tensorflow as tf
 import joblib
 import time
 from iqoptionapi.stable_api import IQ_Option
