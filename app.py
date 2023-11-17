@@ -113,10 +113,10 @@ def start(api,Pipeline,linear_model,DecisionTreeRegressor):
                         st.success('profit...')
                     elif(balance > current_balance):
                         st.error('Loss !!' )
+                        
+                balance = api.get_balance()
 
-
-
-                 balance = api.get_balance() 
+                 
 
         
                 if balance > 100 :
