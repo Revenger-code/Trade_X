@@ -82,6 +82,7 @@ def predict_exacute_order(api,Pipeline,linear_model,DecisionTreeRegressor):
     else :
         st.text('Hold')
         
+        
     c = 'Currant Balance '+ str(api.get_balance() ) 
     l = 'linear pridicted :' + str(Linear_pred)
     d = 'DecisionTreeRegressor pridicted :' +  str(DecisionTreeRegressor_pred)
@@ -97,14 +98,26 @@ def predict_exacute_order(api,Pipeline,linear_model,DecisionTreeRegressor):
 
 def start(api,Pipeline,linear_model,DecisionTreeRegressor):
 
-    balance = api.get_balance()
+    balance = 0
+    
     while True  :
     
         current_time = time.localtime()
         if current_time.tm_sec ==  1 :
             st.text('*'*29)
             if current_time.tm_min % 1 == 0:
-                balance = api.get_balance()
+                
+                current_balance = api.get_balance()
+                if balance != 0:
+                    if(balance < current_balance):
+                        st.success('profit...')
+                    elif(balance > current_balance):
+                        st.error('Loss !!' )
+
+
+
+                 balance = api.get_balance() 
+
         
                 if balance > 100 :
                     predict_exacute_order(api,Pipeline,linear_model,DecisionTreeRegressor)
@@ -134,6 +147,7 @@ def start(api,Pipeline,linear_model,DecisionTreeRegressor):
 
 
 # Main function
+
 def main():
     st.title('Trad X')
     linear_model = load_joblib('new-linear-model-v2.0.joblib')
